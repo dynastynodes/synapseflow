@@ -1,0 +1,108 @@
+version: '3.8'
+
+services:
+  # Frontend (Next.js)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://backend:4000
+      - NEXT_PUBLIC_MCP_URL=http://mcp-server:3001
+    depends_on:
+      - backend
+      - mcp-server
+    networks:
+      - synapseflow-network
+
+  # Backend (Fastify + claude-flow + agentic-flow)
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    environment:
+      - NODE_ENV=production
+      - PORT=4000
+      - POSTGRES_URL=postgresql://postgres:password@postgres:5432/synapseflow
+      - REDIS_URL=redis://redis:6379
+      - NEO4J_URI=bolt://neo4j:7687
+      - HUGGINGFACE_API_KEY=${HUGGINGFACE_API_KEY}
+      - AGENTDB_PATH=/data/agentdb
+    volumes:
+      - agentdb_data:/data/agentdb
+      - ./backend/logs:/app/logs
+    depends_on:
+      - postgres
+      - redis
+      - neo4j
+    networks:
+      - synapseflow-network
+
+  # MCP Server (Model Context Protocol)
+  mcp-server:
+    build:
+      context: ./mcp-server
+      dockerfile: Dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      - MCP_SSE_ENABLED=true
+      - MCP_STDIO_ENABLED=true
+      - BACKEND_URL=http://backend:4000
+    depends_on:
+      - backend
+    networks:
+      - synapseflow-network
+
+  # PostgreSQL with pgvector
+  postgres:
+    image: pgvector/pgvector:latest
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=synapseflow
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - synapseflow-network
+
+  # Redis for caching
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    networks:
+      - synapseflow-network
+
+  # Neo4j for citation graphs
+  neo4j:
+    image: neo4j:5
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      - NEO4J_AUTH=neo4j/password
+      - NEO4J_PLUGINS=["apoc", "graph-data-science"]
+    volumes:
+      - neo4j_data:/data
+    networks:
+      - synapseflow-network
+
+volumes:
+  postgres_data:
+  redis_data:
+  neo4j_data:
+  agentdb_data:
+
+networks:
+  synapseflow-network:
+    driver: bridge
